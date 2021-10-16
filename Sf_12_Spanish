@@ -1,0 +1,84 @@
+#Preparación de datos Encuesta de calidad de vida SF_12
+##Ver más en https://drive.google.com/file/d/1K0059qYZdeJxH_FfOoOBsqUHXmS-jXNF/view?usp=sharing
+
+Qol_preparation=df[['Id','Salud general',
+        'Función fisica_a',
+         'Función fisica_b',
+         'Dolor',
+         'Función social',
+        'Rol fisico_a',
+        'Rol fisico_b',
+        'Rol emocional_a',
+        'Rol emocional_b',
+        'Salud mental_a',
+        'Salud mental_b',
+        'Vitalidad']]
+Qol=Qol_preparation
+
+Qol['Salud general'] = Qol['Salud general'].replace({'Mala': '1',
+                                                     'Regular': '2',
+                                                     'Buena': '3',
+                                                     'Muy buena':'4',
+                                                     'Excelente':'5'}).astype(float)
+
+Qol['Función fisica_a'] = Qol['Función fisica_a'].replace({'Sí, me limita mucho': '1',
+                                                           'Sí, me limita un poco': '2',
+                                                           'No, no me limita nada': '3'}).astype(float)
+
+Qol['Función fisica_b'] = Qol['Función fisica_b'].replace({'Sí, me limita mucho': '1',
+                                                           'Sí, me limita un poco': '2',
+                                                           'No, no me limita nada': '3'}).astype(float)
+
+Qol['Dolor'] = Qol['Dolor'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+
+Qol['Función social'] = Qol['Función social'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+Qol['Rol emocional_b'] = Qol['Rol emocional_b'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+Qol['Rol emocional_a'] = Qol['Rol emocional_a'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+Qol['Rol fisico_b'] = Qol['Rol fisico_b'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+Qol['Rol fisico_a'] = Qol['Rol fisico_a'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+Qol['Salud mental_b'] = Qol['Salud mental_b'].replace({'Siempre': '1',
+                                                     'Casi siempre': '2',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'4',
+                                                     'Nunca':'5'}).astype(float)
+Qol['Salud mental_a'] = df['Salud mental_a'].replace({'Siempre': '5',
+                                                     'Casi siempre': '4',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'2',
+                                                     'Nunca':'1'}).astype(float)
+Qol['Vitalidad'] = Qol['Vitalidad'].replace({'Siempre': '5',
+                                                     'Casi siempre': '4',
+                                                     'Algunas veces': '3',
+                                                     'Pocas veces':'2',
+                                                     'Nunca':'1'}).astype(float)
+                                                     
+Qol['Función fisica']=(Qol['Función fisica_a']+Qol['Función fisica_b'])/2
+Qol['Rol fisico']=(Qol['Rol fisico_a']+Qol['Rol fisico_b'])/2
+Qol['Salud mental']=(Qol['Salud mental_a']+Qol['Salud mental_b'])/2
+Qol['Rol emocional']=(Qol['Rol emocional_a']+Qol['Rol emocional_b'])/2
+
+Sf_12=Qol[['Id','Salud general','Función fisica','Rol fisico','Salud mental','Rol emocional','Función social','Dolor','Vitalidad']]
